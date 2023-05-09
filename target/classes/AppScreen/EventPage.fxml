@@ -32,7 +32,7 @@
                         </ImageView>
                     </children>
                 </Pane>
-                <Button fx:id="homepage" contentDisplay="CENTER" defaultButton="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" stylesheets="@../style/buttonpage.css">
+                <Button fx:id="homepage" contentDisplay="CENTER" defaultButton="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" stylesheets="@../AppObject/buttonpage.css">
                     <VBox.margin>
                         <Insets top="10.0" />
                     </VBox.margin>
@@ -47,7 +47,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-                <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" stylesheets="@../style/buttonpage.css">
+                <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" stylesheets="@../AppObject/buttonpage.css">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>

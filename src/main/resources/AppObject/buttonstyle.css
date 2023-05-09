@@ -2,7 +2,7 @@
     -fx-font-weight: bold;
     -fx-background-color:  #237815;
     -fx-background-radius: 16;
-    -fx-font-size: 16;
+    -fx-font-size: 14;
     -fx-text-fill: white;
 }
 
@@ -10,6 +10,14 @@
     -fx-font-weight: bold;
     -fx-background-color:  white;
     -fx-background-radius: 16;
-    -fx-font-size: 16;
+    -fx-font-size: 14;
     -fx-text-fill: #237815;
+}
+
+.button:selected {
+    -fx-font-weight: bold;
+    -fx-background-color: #153d78;
+    -fx-background-radius: 16;
+    -fx-font-size: 14;
+    -fx-text-fill: white;
 }

@@ -1,64 +1,83 @@
 package AppScreen;
 
+import AppObject.ContentEvent;
+import AppObject.ContentNote;
 import AppObject.Event;
 import AppObject.Note;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.SplitPane;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
-import javafx.scene.text.Text;
 
 import java.net.URL;
-import java.nio.file.attribute.UserPrincipalLookupService;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
     @FXML
-    private Button homeButton;
+    private AnchorPane mainPage;
     @FXML
-    private Button calendarButton;
+    private AnchorPane sectionContentView;
     @FXML
-    private Pane content;
-    @FXML
-    private TilePane danhsach;
-    @FXML
-    private SplitPane page;
-    @FXML
-    private TextField boxSearch;
-    public static List<Note> noteList = new ArrayList<>();
-    public static List<Event> eventList = new ArrayList<>();
+    private Button openList;
+    public static Button _openList;
+
+    public static List<ContentNote> contentNoteList = new ArrayList<>();
+    public static List<ContentEvent> contentEventList = new ArrayList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        for(int i = 0; i < 3; i++) {
-                Note note = new Note();
-                note.setNote_title("ho ho ho" + i);
-                noteList.add(note);
-            danhsach.getChildren().add(new Button(noteList.get(i).getNote_title()));
-        }
+        AnchorPane.setBottomAnchor(Main.listView,0.0);
+        AnchorPane.setTopAnchor(Main.listView,0.0);
+        AnchorPane.setLeftAnchor(Main.listView,60.0);
+
+        AnchorPane.setBottomAnchor(Main.noteView,0.0);
+        AnchorPane.setTopAnchor(Main.noteView,0.0);
+        AnchorPane.setRightAnchor(Main.noteView,0.0);
+        AnchorPane.setLeftAnchor(Main.noteView,0.0);
+
+        AnchorPane.setBottomAnchor(Main.calendarView,0.0);
+        AnchorPane.setTopAnchor(Main.calendarView,0.0);
+        AnchorPane.setLeftAnchor(Main.calendarView,0.0);
+        AnchorPane.setRightAnchor(Main.calendarView,0.0);
+
+
+//        AnchorPane.setBottomAnchor(Main.detailEvent,0.0);
+        AnchorPane.setTopAnchor(Main.detailEvent,50.0);
+        AnchorPane.setLeftAnchor(Main.detailEvent,50.0);
+//        AnchorPane.setRightAnchor(Main.detailEvent,0.0);
+
+
+
+        AnchorPane.setLeftAnchor(sectionContentView,370.0);
+
+        mainPage.getChildren().add(1,Main.listView);
+        mainPage.getChildren().set(0,sectionContentView);
+        _openList = openList;
     }
     @FXML public void viewCalendar() {
-        content.getChildren().removeAll();
-        content.getChildren().setAll(Main.calendarView);
+        if(!sectionContentView.getChildren().contains(Main.calendarView)) {
+            if(sectionContentView.getChildren().contains(Main.noteView)) {
+                sectionContentView.getChildren().remove(Main.noteView);
+            }
+            sectionContentView.getChildren().add(Main.calendarView);
+        }
+        ListObjectController.setListEvent();
     }
     @FXML
     public void viewNote() {
-        content.getChildren().removeAll();
-        content.getChildren().setAll(Main.noteView);
+        if(!sectionContentView.getChildren().contains(Main.noteView)) {
+            if(sectionContentView.getChildren().contains(Main.calendarView)) {
+                sectionContentView.getChildren().remove(Main.calendarView);
+            }
+            sectionContentView.getChildren().add(Main.noteView);
+        }
+        ListObjectController.setListNote();
     }
     @FXML
-    public void thunho() {
-        page.setDividerPositions(0);
-
-    }
-    @FXML
-    public void phongto() {
-        page.setDividerPositions(0.1);
+    private void setOpenList() {
+        ListObjectController.setOpenList();
+        openList.setOpacity(0);
     }
 }
