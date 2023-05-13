@@ -1,6 +1,7 @@
 .scroll-pane{
     -fx-background-color: -fx-text-box-border, -fx-background ;
-    -fx-background-insets: 0,0 0 0 0;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
 }
 .page{
     -fx-background-color:  #C9DBB2;

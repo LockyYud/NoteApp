@@ -14,13 +14,16 @@ public class Event {
     public ContentEvent getContentEvent() {
         return contentEvent;
     }
-
     private ContentEvent contentEvent;
     private ToggleButton button = new ToggleButton();
+    private ToggleButton buttonImportant = new ToggleButton();
+    private ToggleButton buttonWeek = new ToggleButton();
+    private ToggleButton buttonDay = new ToggleButton();
     public Event(ContentEvent contentEvent_) {
         contentEvent = contentEvent_;
         button.setPrefSize(270,30);
         button.setMinSize(270,30);
+        button.setMaxSize(270,30);
         button.setText(contentEvent.getTitle());
         button.setToggleGroup(buttonEvent);
         button.getStylesheets().add(this.getClass().getResource("buttonstyle.css").toExternalForm());
@@ -31,6 +34,31 @@ public class Event {
             }
             ManageEvent.idEventSelected = this.getId();
         });
+
+        buttonDay.setText(button.getText());
+        buttonDay.setOnMouseClicked(button.getOnMouseClicked());
+        buttonDay.setPrefSize(270, button.getPrefHeight());
+        buttonDay.setMinSize(270, button.getMinHeight());
+        buttonDay.setMaxSize(270, button.getMinHeight());
+        buttonDay.getStylesheets().add(this.getClass().getResource("buttonstyle.css").toExternalForm());
+        buttonDay.setToggleGroup(buttonEvent);
+
+        buttonImportant.setText(button.getText());
+        buttonImportant.setOnMouseClicked(button.getOnMouseClicked());
+        buttonImportant.setPrefSize(270, button.getPrefHeight());
+        buttonImportant.setMinSize(270, button.getMinHeight());
+        buttonImportant.setMaxSize(270, button.getMinHeight());
+        buttonImportant.getStylesheets().add(this.getClass().getResource("buttonstyle.css").toExternalForm());
+        buttonImportant.setToggleGroup(buttonEvent);
+
+        buttonWeek.setText(button.getText());
+        buttonWeek.setOnMouseClicked(button.getOnMouseClicked());
+        buttonWeek.setPrefSize(270, button.getPrefHeight());
+        buttonWeek.setMinSize(270, button.getMinHeight());
+        buttonWeek.setMaxSize(270, button.getMinHeight());
+        buttonWeek.getStylesheets().add(this.getClass().getResource("buttonstyle.css").toExternalForm());
+        buttonWeek.setToggleGroup(buttonEvent);
+
     }
     public int getId() {
         return contentEvent.getId();
@@ -63,5 +91,17 @@ public class Event {
         contentEvent.setEnd_time(timeEnd);
         contentEvent.setStart_time(timeStart);
         ManageEvent.writeDataofEventtoFile(contentEvent);
+    }
+
+    public ToggleButton getButtonImportant() {
+        return buttonImportant;
+    }
+
+    public ToggleButton getButtonWeek() {
+        return buttonWeek;
+    }
+
+    public ToggleButton getButtonDay() {
+        return buttonDay;
     }
 }

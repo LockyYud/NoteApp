@@ -34,7 +34,7 @@
          </graphic>
       </Button>
       <TextField fx:id="title" layoutX="104.0" layoutY="40.0" prefHeight="43.0" prefWidth="550.0" promptText="Title" styleClass="text-field-title" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <HBox alignment="CENTER_LEFT" layoutX="50.0" layoutY="76.94921875" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="75.0">
+      <HBox alignment="CENTER_LEFT" layoutX="50.0" layoutY="76.94921875" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="75.0">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="From">
                <HBox.margin>
@@ -85,9 +85,9 @@
                   </ImageView>
                </children>
             </StackPane>
-            <StackPane fx:id="importantBut" onMouseClicked="#saveEvent" prefHeight="40.0" prefWidth="40.0">
+            <StackPane onMouseClicked="#setImportant" prefHeight="40.0" prefWidth="40.0">
                <children>
-                  <ImageView fitHeight="20.0" preserveRatio="true">
+                  <ImageView fx:id="importantBut" fitHeight="20.0" preserveRatio="true">
                      <image>
                         <Image url="@../AppObject/Icon/importantoff.png" />
                      </image>

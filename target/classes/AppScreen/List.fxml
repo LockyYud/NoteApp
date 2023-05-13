@@ -13,7 +13,7 @@
    <children>
       <AnchorPane layoutX="9.0" layoutY="40.0" prefHeight="50.0" prefWidth="290.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
          <children>
-            <TextField fx:id="boxSearch" prefHeight="35.0" prefWidth="197.0" promptText="Search...." style="-fx-background-radius: 15; -fx-background-insets: 1, 1 1 1 1; -fx-background-color: ECF3E2FF;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="5.0" />
+            <TextField fx:id="boxSearch" prefHeight="35.0" prefWidth="197.0" promptText="Search...." styleClass="combo-box" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="5.0" />
          </children>
       </AnchorPane>
       <ScrollPane fitToHeight="true" fitToWidth="true" focusTraversable="false" hbarPolicy="NEVER" layoutY="124.0" prefHeight="376.0" prefWidth="290.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">

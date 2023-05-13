@@ -2,11 +2,13 @@ package AppScreen;
 
 import AppObject.ContentNote;
 import AppObject.Event;
+import AppObject.Note;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -36,7 +38,8 @@ public class Main extends Application {
         listView = new FXMLLoader(Main.class.getResource("List.fxml")).load();
         mainPage = new FXMLLoader(Main.class.getResource("HomePage.fxml")).load();
         Scene scene = new Scene(mainPage,1280 , 600);
-        stage.setTitle("Note App");
+        stage.setTitle("NOCA");
+        stage.getIcons().add(new Image(Note.class.getResourceAsStream("/AppObject/Icon/logo.png")));
         stage.setScene(scene);
         stage.show();
     }

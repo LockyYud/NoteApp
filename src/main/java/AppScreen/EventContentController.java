@@ -1,6 +1,7 @@
 package AppScreen;
 
 import AppObject.Event;
+import AppObject.Note;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -9,8 +10,10 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -50,7 +53,8 @@ public class EventContentController implements Initializable {
     @FXML
     private StackPane deleteBut;
     @FXML
-    private StackPane importantBut;
+    private ImageView importantBut;
+    private static ImageView importantButton;
     @FXML
     private Text created;
     @FXML
@@ -79,6 +83,7 @@ public class EventContentController implements Initializable {
         dateHappenEvent = datePicker;
         create = created;
         update = updated;
+        importantButton = importantBut;
         title.setOnKeyReleased(Event -> {
             event.getButton().setText(title.getText());
             haveSaved.setOpacity(0);
@@ -145,12 +150,6 @@ public class EventContentController implements Initializable {
                 MainController.openBoxDelete();
             }
         });
-
-//        page.setOnMouse(e -> {
-//            if(e.isPrimaryButtonDown()) {
-//                close();
-//            }
-//        });
     }
 
     private void addTextLimiter(final TextField tf, final int maxLength) {
@@ -196,5 +195,27 @@ public class EventContentController implements Initializable {
         dateHappenEvent.setValue(timeStart.toLocalDate());
         update.setText(e.getUpdated_at().toLocalDate().toString());
         create.setText(e.getCreated_at().toLocalDate().toString());
+        if(!e.getContentEvent().isImportant()) {
+            importantButton.setOpacity(0);
+        }
+    }
+
+    @FXML
+    private void setImportant(MouseEvent e) {
+        if(e.getButton().equals(MouseButton.PRIMARY)) {
+            event.getContentEvent().setImportant(!event.getContentEvent().isImportant());
+            if(event.getContentEvent().isImportant()){
+                importantBut.setOpacity(1);
+                CalendarController._listImportantEvent.getChildren().add(event.getButtonImportant());
+                event.getButtonImportant().setGraphic( new ImageView(new Image(Note.class.getResourceAsStream("/AppObject/Icon/importantoff.png"),20,20,true,false)));;
+                event.getButton().setGraphic( new ImageView(new Image(Note.class.getResourceAsStream("/AppObject/Icon/importantoff.png"),20,20,true,false)));
+            } else {
+                importantBut.setOpacity(0);
+                CalendarController._listImportantEvent.getChildren().remove(event.getButtonImportant());
+                event.getButtonImportant().setGraphic(null);;
+                event.getButton().setGraphic(null);
+
+            }
+        }
     }
 }
