@@ -63,7 +63,7 @@
          <graphic>
             <ImageView fitWidth="25.0" preserveRatio="true">
                <image>
-                  <Image url="@../AppObject/Icon/add.png" />
+                  <Image url="@../AppObject/Icon/menuopen.png" />
                </image>
             </ImageView>
          </graphic>

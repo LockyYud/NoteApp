@@ -18,9 +18,9 @@
          <children>
             <AnchorPane prefHeight="83.0" prefWidth="60.0" style="-fx-background-color: #7AA874;">
                <children>
-                  <ImageView fitHeight="72.0" fitWidth="55.0" layoutX="3.0" layoutY="5.0" preserveRatio="true" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="5.0">
+                  <ImageView fitHeight="72.0" fitWidth="55.0" preserveRatio="true" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="5.0">
                      <image>
-                        <Image url="@../AppObject/Icon/organize.png" />
+                        <Image url="@../AppObject/Icon/logo.png" />
                      </image>
                   </ImageView>
                   <Label layoutX="6.0" layoutY="60.0" text="NOCA" textFill="#ddffbb">
@@ -63,7 +63,7 @@
          <graphic>
             <ImageView fitWidth="25.0" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../CNPM/icon/menuopen.png" />
+                  <Image url="@../AppObject/Icon/add.png" />
                </image>
             </ImageView>
          </graphic>

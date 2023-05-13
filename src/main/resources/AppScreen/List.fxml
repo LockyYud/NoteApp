@@ -23,21 +23,21 @@
       </ScrollPane>
       <Button mnemonicParsing="false" onMouseClicked="#Create" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 25;" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="10.0">
          <graphic>
-            <ImageView fitHeight="25.0" fitWidth="25.0">
+            <ImageView fitHeight="25.0" fitWidth="25.0" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../CNPM/icon/add.png" />
+                  <Image url="@../AppObject/Icon/add.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <HBox alignment="CENTER_RIGHT" layoutX="173.0" layoutY="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox alignment="CENTER_RIGHT" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ComboBox fx:id="sort" maxHeight="-Infinity" maxWidth="-Infinity" promptText="sort" style="-fx-border-color: black; -fx-border-radius: 12; -fx-background-radius: 12;" />
             <Button mnemonicParsing="false" onMouseClicked="#setCloseList" prefHeight="42.0" prefWidth="41.0" style="-fx-background-color: transparent;">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="25.0" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../CNPM/icon/menuclose.png" />
+                        <Image url="@../AppObject/Icon/menuclose.png" />
                      </image>
                   </ImageView>
                </graphic>
