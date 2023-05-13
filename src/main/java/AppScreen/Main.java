@@ -22,12 +22,12 @@ public class Main extends Application {
     public static TabPane noteView;
     public static AnchorPane detailEvent;
     public static AnchorPane listView;
-    public static int numsNote = 0;
+
     public static int numsNoteNew = 0;
     public static void main(String[] args) {
         launch();
     }
-
+    public static Stage mainStage;
 
     public void start(Stage stage) throws IOException {
         calendarView = new FXMLLoader(Main.class.getResource("Calendar.fxml")).load();

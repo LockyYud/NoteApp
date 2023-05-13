@@ -1,0 +1,16 @@
+.scroll-pane{
+    -fx-background-color: -fx-text-box-border, -fx-background ;
+    -fx-background-insets: 0,0 0 0 0;
+}
+.page{
+    -fx-background-color:  #C9DBB2;
+}
+.combo-box{
+    -fx-background-color: #C9DBB2;
+}
+.text-field{
+    -fx-background-color: #ECF3E2FF;
+    -fx-background-insets: 1, 1 1 1 1;
+    -fx-background-radius: 15;
+    -fx-text-fill: #3C6255;
+}

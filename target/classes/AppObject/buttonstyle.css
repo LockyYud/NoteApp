@@ -1,23 +1,30 @@
-.button {
+.toggle-button {
     -fx-font-weight: bold;
-    -fx-background-color:  #237815;
-    -fx-background-radius: 16;
+    -fx-background-color:  #A4BC92;
+    -fx-background-radius: 10;
     -fx-font-size: 14;
     -fx-text-fill: white;
 }
 
-.button:hover {
+.toggle-button:hover {
     -fx-font-weight: bold;
-    -fx-background-color:  white;
-    -fx-background-radius: 16;
+    -fx-background-color:  #B3C99C;
+    -fx-background-radius: 10;
     -fx-font-size: 14;
-    -fx-text-fill: #237815;
+    -fx-text-fill: #D6E8DB;
 }
 
-.button:selected {
+.toggle-button:selected {
     -fx-font-weight: bold;
-    -fx-background-color: #153d78;
-    -fx-background-radius: 16;
+    -fx-background-color: #DDFFBB;
+    -fx-background-radius: 10;
     -fx-font-size: 14;
-    -fx-text-fill: white;
+    -fx-text-fill: #99A98F;
+}
+.toggle-button-save  {
+    -fx-font-weight: bold;
+    -fx-background-color: #FFF8DE;
+    -fx-background-radius: 10;
+    -fx-font-size: 14;
+    -fx-text-fill: #99A98F;
 }

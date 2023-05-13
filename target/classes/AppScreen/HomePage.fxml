@@ -1,68 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="mainPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AppScreen.MainController">
    <children>
-      <AnchorPane fx:id="sectionContentView" layoutX="71.0" layoutY="-4.0" maxHeight="-Infinity" prefHeight="600.0" prefWidth="930.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" prefHeight="720.0" prefWidth="60.0" style="-fx-background-color: #BAF8CB;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="sectionContentView" layoutX="71.0" layoutY="-4.0" maxHeight="-Infinity" prefHeight="600.0" prefWidth="930.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" prefHeight="720.0" prefWidth="60.0" style="-fx-background-color: #C1D0B5;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Pane accessibleRole="BUTTON" maxHeight="80.0" minHeight="80.0" prefHeight="80.0" style="-fx-background-color: #5DC77A;">
+            <AnchorPane prefHeight="83.0" prefWidth="60.0" style="-fx-background-color: #7AA874;">
                <children>
-                  <ImageView accessibleRole="BUTTON" fitHeight="60.0" fitWidth="60.0" layoutY="10.0" mouseTransparent="true">
+                  <ImageView fitHeight="72.0" fitWidth="55.0" layoutX="3.0" layoutY="5.0" preserveRatio="true" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="5.0">
                      <image>
-                        <Image url="@../../../../../../dowload/notelogo.png" />
+                        <Image url="@../AppObject/Icon/organize.png" />
                      </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <effect>
-                        <ColorAdjust />
-                     </effect>
                   </ImageView>
+                  <Label layoutX="6.0" layoutY="60.0" text="NOCA" textFill="#ddffbb">
+                     <font>
+                        <Font name=".VnCourier NewH Bold" size="20.0" />
+                     </font>
+                  </Label>
                </children>
-            </Pane>
-            <Button contentDisplay="CENTER" defaultButton="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#viewNote" prefHeight="50.0" prefWidth="50.0" stylesheets="@../AppObject/buttonpage.css">
+            </AnchorPane>
+            <ToggleButton layoutX="15.0" layoutY="160.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#viewNote" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10;" stylesheets="@../AppObject/buttonstyle.css">
+               <graphic>
+                  <ImageView fitHeight="97.0" fitWidth="36.0" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../CNPM/icon/note.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <toggleGroup>
+                  <ToggleGroup fx:id="page" />
+               </toggleGroup>
+            </ToggleButton>
+            <ToggleButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#viewCalendar" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10;" stylesheets="@../AppObject/buttonstyle.css" toggleGroup="$page">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
                <graphic>
-                  <ImageView fitHeight="40.0" fitWidth="40.0" preserveRatio="true">
+                  <ImageView fitWidth="60.0" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../CNPM/icon/home.png" />
+                        <Image url="@../AppObject/Icon/calendar.png" />
                      </image>
                   </ImageView>
                </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#viewCalendar" prefHeight="50.0" prefWidth="50.0" stylesheets="@../AppObject/buttonpage.css">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <VBox.margin>
-                  <Insets top="30.0" />
-               </VBox.margin>
-               <graphic>
-                  <ImageView fitHeight="40.0" fitWidth="40.0">
-                     <image>
-                        <Image url="@../../../../../../CNPM/icon/calendar.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
+            </ToggleButton>
          </children>
       </VBox>
-      <Button fx:id="openList" layoutX="99.0" layoutY="34.0" mnemonicParsing="false" onMouseClicked="#setOpenList" opacity="0.0" prefHeight="42.0" prefWidth="41.0" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="65.0" AnchorPane.topAnchor="5.0">
+      <Button fx:id="openList" layoutX="62.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#setOpenList" opacity="0.0" prefHeight="42.0" prefWidth="41.0" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="0.0">
          <graphic>
             <ImageView fitWidth="25.0" preserveRatio="true">
                <image>

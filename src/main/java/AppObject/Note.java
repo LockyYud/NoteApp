@@ -1,70 +1,78 @@
 package AppObject;
 
 import AppScreen.Main;
-import ManageObject.ManageNote;
+import AppScreen.MainController;
+import AppScreen.TabNoteController;
+import Manage.ManageEvent;
+import Manage.ManageNote;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
+import javafx.scene.web.HTMLEditor;
 
-import java.io.IOException;
 import java.time.ZonedDateTime;
 
 public class Note {
+    private static ToggleGroup buttonNote = new ToggleGroup();
     //Content Note
     private ContentNote contentNote;
     //Button Note
-    private Button buttonNote = new Button();
+    private ToggleButton button = new ToggleButton();
     //Tab Note
-    private Tab tabNote = new Tab();
+    private Tab tab = new Tab();
     private AnchorPane tabContent = new AnchorPane();
-    private TextField tab_NoteTitle = new TextField();
-    private TextArea tab_NoteBody = new TextArea();
+    private TextField title = new TextField();
+    private HTMLEditor body = new HTMLEditor();
     private boolean canSave = false;
+    private Label deleteFromButton = new Label("delete");
 
     public Note(ContentNote content) {
-        buttonNote.setPrefSize(200,40);
-        buttonNote.getStylesheets().add(this.getClass().getResource("buttonstyle.css").toExternalForm());
+        button.setToggleGroup(buttonNote);
+        button.setPrefSize(270,30);
+        button.setMinSize(270,30);
+        button.getStylesheets().add(this.getClass().getResource("buttonstyle.css").toExternalForm());
         contentNote = content;
-        buttonNote.setText(contentNote.getTitle());
-        tabNote.setText(contentNote.getTitle());
-        tab_NoteBody.setPromptText("Body");
-        tab_NoteTitle.setPromptText("Title");
-        tab_NoteTitle.setAlignment(Pos.BOTTOM_LEFT);
-        tab_NoteTitle.getStylesheets().add(this.getClass().getResource("textfieldstyle.css").toString());
-        tab_NoteBody.getStylesheets().add(this.getClass().getResource("textareastyle.css").toString());
-        tab_NoteBody.setText(contentNote.getBody());
-        tab_NoteTitle.setText(contentNote.getTitle());
+        button.setText(contentNote.getTitle());
+        tab.setText(contentNote.getTitle());
+
+        title.setPromptText("Title");
+        title.setAlignment(Pos.BOTTOM_LEFT);
+        body.setHtmlText(contentNote.getBody());
+        title.setText(contentNote.getTitle());
+
+        deleteFromButton.setPrefSize(50,20);
+        deleteFromButton.setBackground(Background.fill(Color.WHITE));
+        deleteFromButton.setOnMouseEntered(e -> {
+            deleteFromButton.setBorder(Border.stroke(Color.BLACK));
+        });
+        deleteFromButton.setOnMouseExited(e -> {
+            Main.listView.getChildren().remove(deleteFromButton);
+        });
+
         makeTab();
     }
     private void makeTab() {
         //design tab layout
-        tabNote.setClosable(true);
-        tabNote.setContent(tabContent);
+        tab.setClosable(true);
+        tab.setContent(tabContent);
 
-        AnchorPane.setTopAnchor(tab_NoteBody,70.0);
-        AnchorPane.setBottomAnchor(tab_NoteBody,50.0);
-        AnchorPane.setLeftAnchor(tab_NoteBody,10.0);
-        AnchorPane.setRightAnchor(tab_NoteBody,20.0);
+        AnchorPane.setTopAnchor(body,70.0);
+        AnchorPane.setBottomAnchor(body,50.0);
+        AnchorPane.setLeftAnchor(body,10.0);
+        AnchorPane.setRightAnchor(body,20.0);
 
-        AnchorPane.setTopAnchor(tab_NoteTitle,0.0);
-        AnchorPane.setLeftAnchor(tab_NoteTitle,10.0);
-        AnchorPane.setRightAnchor(tab_NoteTitle,20.0);
-
-
-
-
+        AnchorPane.setTopAnchor(title,0.0);
+        AnchorPane.setLeftAnchor(title,10.0);
+        AnchorPane.setRightAnchor(title,20.0);
 
         //text update and create
         Text created = new Text("Created: " + contentNote.getCreated_at().getMonth().toString() + ", " +
@@ -96,8 +104,8 @@ public class Note {
             if(canSave){
                 saveBut.setGraphic(save);
                 canSave = false;
-                contentNote.setBody(tab_NoteBody.getText());
-                contentNote.setTitle(tab_NoteTitle.getText());
+                contentNote.setBody(body.getHtmlText());
+                contentNote.setTitle(title.getText());
                 contentNote.setUpdated_at(ZonedDateTime.now());
                 lastUpdate.setText("Last Update: " + contentNote.getUpdated_at().getMonth().toString() + ", " +
                         contentNote.getUpdated_at().getDayOfMonth() + ", " +
@@ -107,91 +115,107 @@ public class Note {
         });
 
 
-        //italic
-        ImageView italic = new ImageView(new Image(Note.class.getResourceAsStream("/AppObject/Icon/italic.png")));
-        Button italicBut = new Button();
-        italicBut.setGraphic(italic);
-        italicBut.setStyle("-fx-background-color:  transparent");
-        italic.setPreserveRatio(true);
-        italic.setFitHeight(20);
+        //delete
+        ImageView delete = new ImageView(new Image(Note.class.getResourceAsStream("/AppObject/Icon/delete.png")));
+        Button deleteBut = new Button();
+        deleteBut.setGraphic(delete);
+        deleteBut.setStyle("-fx-background-color:  transparent");
+        delete.setPreserveRatio(true);
+        delete.setFitHeight(20);
+        deleteBut.setOnMouseClicked(e -> {
+            if(e.getButton().equals(MouseButton.PRIMARY)) {
+                MainController.openBoxDelete();
+            }
+        });
+
+        //important note
+        ImageView importanton = new ImageView(new Image(Note.class.getResourceAsStream("/AppObject/Icon/importanton.png")));
+        ImageView importantoff = new ImageView(new Image(Note.class.getResourceAsStream("/AppObject/Icon/importantoff.png")));
+        Button importantButton = new Button();
+        if(contentNote.isImportant()) {
+            importantButton.setGraphic(importantoff);
+            button.setGraphic( new ImageView(new Image(Note.class.getResourceAsStream("/AppObject/Icon/importantoff.png"),20,20,true,false)));
+        } else {
+            importantButton.setGraphic(importanton);
+        }
+        importantButton.setStyle("-fx-background-color:  transparent");
+        importanton.setPreserveRatio(true);
+        importanton.setFitHeight(30);
+        importantoff.setPreserveRatio(true);
+        importantoff.setFitHeight(30);
+        importantButton.setOnMouseClicked(Event -> {
+            contentNote.setImportant(!contentNote.isImportant());
+            if(contentNote.isImportant()) {
+                button.setGraphic( new ImageView(new Image(Note.class.getResourceAsStream("/AppObject/Icon/importantoff.png"),20,20,true,false)));
+                importantButton.setGraphic(importantoff);
+            } else {
+                button.setGraphic(null);
+                importantButton.setGraphic(importanton);
+            }
+            canSave = true;
+            saveBut.setGraphic(saved);
+        });
 
 
-
-        //underline
-        ImageView underline = new ImageView(new Image(Note.class.getResourceAsStream("/AppObject/Icon/underline.png")));
-        Button underlineBut = new Button();
-        underlineBut.setGraphic(underline);
-        underline.setPreserveRatio(true);
-        underlineBut.setStyle("-fx-background-color:  transparent");
-        underline.setFitHeight(20);
-
-
-        //bold
-        ImageView bold = new ImageView(new Image(Note.class.getResourceAsStream("/AppObject/Icon/bold.png")));
-        Button boldBut = new Button();
-        boldBut.setGraphic(bold);
-        bold.setPreserveRatio(true);
-        boldBut.setStyle("-fx-background-color:  transparent");
-        bold.setFitHeight(20);
-
-
-
-        HBox taskBox = new HBox(saveBut,boldBut,italicBut,underlineBut);
+        HBox taskBox = new HBox(saveBut, deleteBut, importantButton);
         taskBox.setAlignment(Pos.CENTER_LEFT);
         AnchorPane.setBottomAnchor(taskBox,10.0);
         AnchorPane.setLeftAnchor(taskBox,20.0);
         AnchorPane.setRightAnchor(taskBox,20.0);
         taskBox.setSpacing(10);
 
-        tabContent.getChildren().addAll(tab_NoteBody, tab_NoteTitle, taskTime, taskBox);
+        tabContent.getChildren().addAll(body, title, taskTime, taskBox);
         //set up mouse click
-        tab_NoteTitle.setOnKeyReleased(new EventHandler<KeyEvent>() {
+        title.setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                tabNote.setText(tab_NoteTitle.getText());
-                buttonNote.setText(tab_NoteTitle.getText());
+                tab.setText(title.getText());
+                button.setText(title.getText());
                 canSave = true;
                 saveBut.setGraphic(saved);
             }
         });
-        tab_NoteBody.setOnKeyReleased(new EventHandler<KeyEvent>() {
+        body.setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
                 canSave = true;
                 saveBut.setGraphic(saved);
             }
         });
-        buttonNote.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        button.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(!Main.noteView.getTabs().contains(tabNote)){
-                    Main.noteView.getTabs().add(tabNote);
+                if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+                    if (!Main.noteView.getTabs().contains(tab)) {
+                        Main.noteView.getTabs().add(tab);
+                    }
+                    Main.noteView.getSelectionModel().select(tab);
+                    ManageNote.idNoteSelected = getId();
+                } else {
+                    if(mouseEvent.getButton().equals(MouseButton.SECONDARY) && ManageNote.idNoteSelected == contentNote.getId()) {
+                        Main.mainPage.getChildren().add(deleteFromButton);
+                        deleteFromButton.setLayoutX(mouseEvent.getScreenX());
+                        deleteFromButton.setLayoutY(mouseEvent.getSceneY());
+                    }
                 }
-                Main.noteView.getSelectionModel().select(tabNote);
             }
         });
+
+
     }
 
-
-
-    //save content note
-    private void saveNote() {
-        contentNote.setTitle(tab_NoteTitle.getText());
-        contentNote.setBody(tab_NoteBody.getText());
-        ManageNote.writeDataofNotetoFile(contentNote);
-    }
 
     //Getter
     public int getId() {
         return contentNote.getId();
     }
 
-    public Button getButton() {
-        return buttonNote;
+    public ToggleButton getButton() {
+        return button;
     }
 
-    public Tab getTabNote() {
-        return tabNote;
+    public Tab getTab() {
+        return tab;
     }
 
     public ContentNote getContentNote() {

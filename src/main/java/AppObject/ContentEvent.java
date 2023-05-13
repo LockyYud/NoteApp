@@ -1,66 +1,33 @@
 package AppObject;
 
 
-import java.util.Date;
+import java.io.Serializable;
+import java.time.ZonedDateTime;
 
-public class ContentEvent {
-    private int event_id;
-    private String event_title;
-    private String event_description;
-    private Date start_time;
-    private Date end_time;
-    private Date reminder_time;
-    private String event_location;
+public class ContentEvent extends ContentObject implements Serializable {
 
-    public int getEvent_id() {
-        return event_id;
-    }
+    private ZonedDateTime start_time = ZonedDateTime.now();
+    private ZonedDateTime end_time = ZonedDateTime.now();
 
-    public String getEvent_title() {
-        return event_title;
-    }
-
-    public void setEvent_title(String event_title) {
-        this.event_title = event_title;
-    }
-
-    public String getEvent_description() {
-        return event_description;
-    }
-
-    public void setEvent_description(String event_description) {
-        this.event_description = event_description;
-    }
-
-    public Date getStart_time() {
+    public ZonedDateTime getStart_time() {
         return start_time;
     }
 
-    public void setStart_time(Date start_time) {
+    public void setStart_time(ZonedDateTime start_time) {
         this.start_time = start_time;
     }
 
-    public Date getEnd_time() {
+    public ZonedDateTime getEnd_time() {
         return end_time;
     }
 
-    public void setEnd_time(Date end_time) {
+    public void setEnd_time(ZonedDateTime end_time) {
         this.end_time = end_time;
     }
 
-    public Date getReminder_time() {
-        return reminder_time;
-    }
-
-    public void setReminder_time(Date reminder_time) {
-        this.reminder_time = reminder_time;
-    }
-
-    public String getEvent_location() {
-        return event_location;
-    }
-
-    public void setEvent_location(String event_location) {
-        this.event_location = event_location;
+    public ContentEvent() {
+        created_at = ZonedDateTime.now();
+        updated_at = ZonedDateTime.now();
+        this.id = this.hashCode();
     }
 }
