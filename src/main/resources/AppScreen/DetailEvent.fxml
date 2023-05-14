@@ -70,12 +70,12 @@
                      <children>
                         <ImageView fx:id="haveSaved" fitHeight="20.0" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../CNPM/icon/save-instagram%20(1).png" />
+                              <Image url="@../AppObject/Icon/save.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="notSaved" fitHeight="20.0" preserveRatio="true">
+                        <ImageView fitHeight="20.0" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../CNPM/icon/save-instagram.png" />
+                              <Image url="@../AppObject/Icon/saved.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -84,7 +84,7 @@
                      <children>
                         <ImageView fitHeight="20.0" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../CNPM/icon/delete.png" />
+                              <Image url="@../AppObject/Icon/delete.png" />
                            </image>
                         </ImageView>
                      </children>
