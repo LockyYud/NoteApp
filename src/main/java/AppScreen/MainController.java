@@ -57,6 +57,7 @@ public class MainController implements Initializable {
     };
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         AnchorPane.setBottomAnchor(Main.listView,0.0);
         AnchorPane.setTopAnchor(Main.listView,0.0);
         AnchorPane.setLeftAnchor(Main.listView,60.0);
@@ -92,8 +93,14 @@ public class MainController implements Initializable {
         open.setDuration(Duration.seconds(0.45));
         open.setByX(290);
 
+        setUpStageDelete();
+
+    }
+
+    private void setUpStageDelete() {
         HBox box = new HBox();
-        definitely_delete.setScene(new Scene(box,100,50));
+        definitely_delete.setTitle("Do you want to delete?");
+        definitely_delete.setScene(new Scene(box,300,50));
         Button yes = new Button("Yes");
         Button no = new Button("No");
         box.setAlignment(Pos.CENTER);
@@ -127,6 +134,7 @@ public class MainController implements Initializable {
             sectionContentView.getChildren().add(Main.calendarView);
         }
         ListObjectController.setListEvent();
+        CalendarController.listUp();
     }
     @FXML
     public void viewNote() {

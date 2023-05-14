@@ -4,6 +4,7 @@ import AppObject.Event;
 import AppObject.Note;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
@@ -29,9 +30,7 @@ import java.util.function.UnaryOperator;
 
 public class EventContentController implements Initializable {
     @FXML
-    private StackPane save;
-    @FXML
-    private ImageView notSaved;
+    private AnchorPane pageDetail;
     @FXML
     private AnchorPane page;
     @FXML
@@ -47,6 +46,8 @@ public class EventContentController implements Initializable {
     @FXML
     private TextField title;
     @FXML
+    private TextField location;
+    @FXML
     private TextArea body;
     @FXML
     private DatePicker datePicker;
@@ -61,6 +62,7 @@ public class EventContentController implements Initializable {
     private Text updated;
     private static DatePicker dateHappenEvent;
     private static TextField titleEvent;
+    private static TextField locationEvent;
     private static TextArea bodyEvent;
     public static Event event;
     public static TextField hFrom;
@@ -84,8 +86,9 @@ public class EventContentController implements Initializable {
         create = created;
         update = updated;
         importantButton = importantBut;
+        locationEvent = location;
         title.setOnKeyReleased(Event -> {
-            event.getButton().setText(title.getText());
+            event.setText(title.getText());
             haveSaved.setOpacity(0);
         });
         body.setOnKeyReleased(Event -> {
@@ -150,6 +153,9 @@ public class EventContentController implements Initializable {
                 MainController.openBoxDelete();
             }
         });
+
+        pageDetail.setOnMousePressed(circleOnMousePressedEventHandler);
+        pageDetail.setOnMouseDragged(circleOnMouseDraggedEventHandler);
     }
 
     private void addTextLimiter(final TextField tf, final int maxLength) {
@@ -164,8 +170,12 @@ public class EventContentController implements Initializable {
         });
     }
     @FXML
-    private void close() {
+    private void close(){
         Main.calendarView.getChildren().remove(Main.detailEvent);
+        event.getButton().setSelected(false);
+        event.getButtonImportant().setSelected(false);
+        event.getButtonDay().setSelected(false);
+        event.getButtonWeek().setSelected(false);
     }
     @FXML
     private void saveEvent() {
@@ -178,7 +188,7 @@ public class EventContentController implements Initializable {
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
-        event.save(titleEvent.getText(), bodyEvent.getText(), timeStart.atZone(zoneId), timeEnd.atZone(zoneId));
+        event.save(titleEvent.getText(), bodyEvent.getText(), location.getText(), timeStart.atZone(zoneId), timeEnd.atZone(zoneId));
         haveSaved.setOpacity(1);
     }
     public static void assignEvent(Event e) {
@@ -188,13 +198,30 @@ public class EventContentController implements Initializable {
         zoneId = e.getStartTime().getZone();
         titleEvent.setText(e.getTitle());
         bodyEvent.setText(e.getBody());
-        hFrom.setText(Integer.toString(timeStart.getHour()));
-        hTo.setText(Integer.toString(timeEnd.getHour()));
-        mFrom.setText(Integer.toString(timeStart.getMinute()));
-        mTo.setText(Integer.toString(timeEnd.getMinute()));
-        dateHappenEvent.setValue(timeStart.toLocalDate());
+        if(timeStart.getHour() >= 10){
+            hFrom.setText(Integer.toString(timeStart.getHour()));
+        } else {
+            hFrom.setText("0" + Integer.toString(timeStart.getHour()));
+        }
+        if(timeEnd.getHour() >= 10){
+            hTo.setText(Integer.toString(timeEnd.getHour()));
+        } else {
+            hTo.setText("0" + Integer.toString(timeEnd.getHour()));
+        }
+        if(timeStart.getMinute() >= 10){
+            mFrom.setText(Integer.toString(timeStart.getMinute()));
+        } else {
+            mFrom.setText("0" + Integer.toString(timeStart.getMinute()));
+        }
+        if(timeEnd.getMinute() >= 10){
+            mTo.setText(Integer.toString(timeEnd.getMinute()));
+        } else {
+            mTo.setText("0" + Integer.toString(timeEnd.getMinute()));
+        }
+        dateHappenEvent.setValue(CalendarController.getDaySelected());
         update.setText(e.getUpdated_at().toLocalDate().toString());
         create.setText(e.getCreated_at().toLocalDate().toString());
+        locationEvent.setText(e.getContentEvent().getLocation());
         if(!e.getContentEvent().isImportant()) {
             importantButton.setOpacity(0);
         }
@@ -203,19 +230,61 @@ public class EventContentController implements Initializable {
     @FXML
     private void setImportant(MouseEvent e) {
         if(e.getButton().equals(MouseButton.PRIMARY)) {
+            haveSaved.setOpacity(0);
             event.getContentEvent().setImportant(!event.getContentEvent().isImportant());
             if(event.getContentEvent().isImportant()){
                 importantBut.setOpacity(1);
                 CalendarController._listImportantEvent.getChildren().add(event.getButtonImportant());
-                event.getButtonImportant().setGraphic( new ImageView(new Image(Note.class.getResourceAsStream("/AppObject/Icon/importantoff.png"),20,20,true,false)));;
-                event.getButton().setGraphic( new ImageView(new Image(Note.class.getResourceAsStream("/AppObject/Icon/importantoff.png"),20,20,true,false)));
+                event.setGraphic(Note.class.getResource("/AppObject/Icon/importantoff.png").toExternalForm());;
             } else {
                 importantBut.setOpacity(0);
                 CalendarController._listImportantEvent.getChildren().remove(event.getButtonImportant());
-                event.getButtonImportant().setGraphic(null);;
-                event.getButton().setGraphic(null);
-
+                event.setGraphic(null);;
             }
         }
+    }
+
+    private double startX = 0;
+    private double startY = 0;
+    double orgSceneX, orgSceneY;
+    double orgTranslateX, orgTranslateY;
+    EventHandler<MouseEvent> circleOnMousePressedEventHandler =
+            new EventHandler<MouseEvent>() {
+
+                @Override
+                public void handle(MouseEvent t) {
+                    orgSceneX = t.getSceneX();
+                    orgSceneY = t.getSceneY();
+                    orgTranslateX = ((AnchorPane)(t.getSource())).getTranslateX();
+                    orgTranslateY = ((AnchorPane)(t.getSource())).getTranslateY();
+                }
+            };
+
+    EventHandler<MouseEvent> circleOnMouseDraggedEventHandler =
+            new EventHandler<MouseEvent>() {
+
+                @Override
+                public void handle(MouseEvent t) {
+                    double offsetX = t.getSceneX() - orgSceneX;
+                    double offsetY = t.getSceneY() - orgSceneY;
+                    double newTranslateX = orgTranslateX + offsetX;
+                    double newTranslateY = orgTranslateY + offsetY;
+
+                    ((AnchorPane)(t.getSource())).setTranslateX(newTranslateX);
+                    ((AnchorPane)(t.getSource())).setTranslateY(newTranslateY);
+                }
+            };
+    @FXML
+    void draged(MouseEvent event) {
+//        pageDetail.setTranslateX(event.getScreenX() - startX);
+//        pageDetail.setTranslateY(event.getScreenY() - startY);
+//        System.out.println(event.getScreenX());
+    }
+
+    @FXML
+    void pressed(MouseEvent event) {
+//        startX = event.getScreenX();
+//        startY = event.getScreenY();
+//        System.out.println(pageDetail.getTranslateX());
     }
 }

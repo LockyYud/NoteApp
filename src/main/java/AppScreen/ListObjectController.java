@@ -144,6 +144,8 @@ public class ListObjectController implements Initializable {
             fadeList.play();
             closeList.play();
             AnchorPane.clearConstraints(MainController.contentView);
+            AnchorPane.setBottomAnchor(MainController.contentView,0.0);
+            AnchorPane.setTopAnchor(MainController.contentView,0.0);
             MainController.closeContentView.play();
             MainController._openList.setOpacity(1);
             isOpening = false;
@@ -156,7 +158,6 @@ public class ListObjectController implements Initializable {
             emergeList.play();
             openList.play();
             isOpening = true;
-
         }
     }
 

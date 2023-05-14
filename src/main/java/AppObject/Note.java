@@ -43,8 +43,8 @@ public class Note {
         contentNote = content;
         button.setText(contentNote.getTitle());
         tab.setText(contentNote.getTitle());
-
         title.setPromptText("Title");
+        title.getStylesheets().add(this.getClass().getResource("tabpane.css").toExternalForm());
         title.setAlignment(Pos.BOTTOM_LEFT);
         body.setHtmlText(contentNote.getBody());
         title.setText(contentNote.getTitle());
@@ -57,7 +57,6 @@ public class Note {
         deleteFromButton.setOnMouseExited(e -> {
             Main.listView.getChildren().remove(deleteFromButton);
         });
-
         makeTab();
     }
     private void makeTab() {
@@ -163,6 +162,8 @@ public class Note {
         AnchorPane.setLeftAnchor(taskBox,20.0);
         AnchorPane.setRightAnchor(taskBox,20.0);
         taskBox.setSpacing(10);
+
+        body.setHtmlText("<body style='background-color:  #F5F0BB;'/>");
 
         tabContent.getChildren().addAll(body, title, taskTime, taskBox);
         //set up mouse click

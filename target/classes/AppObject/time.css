@@ -1,5 +1,6 @@
 .page{
     -fx-background-color: -fx-text-box-border, -fx-background, #D6E8DB;
+    -fx-background-radius: 10;
 }
 .text-field-title {
     -fx-background-color: -fx-text-box-border, -fx-background, #D6E8DB;
@@ -37,7 +38,7 @@
 }
 .text-area:focused .content {
     -fx-background-color: #D6E8DB;
-    -fx-background-insets: 0;
+    -fx-background-insets: 0, 0 0 1 0;
     -fx-background-radius: 0;
 }
 .button-close {
@@ -57,7 +58,7 @@
 .text-field-location {
     -fx-background-color: -fx-text-box-border, -fx-background, #D6E8DB;
     -fx-font-size: 14;
-    -fx-background-insets: 0, 0 0 1 0 ;
+    -fx-background-insets: 0 , 0 0 1 0;
     -fx-background-radius: 0 ;
 }
 .text-field-location:focused {

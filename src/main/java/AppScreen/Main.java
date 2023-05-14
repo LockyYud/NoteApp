@@ -4,6 +4,7 @@ import AppObject.ContentNote;
 import AppObject.Event;
 import AppObject.Note;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -37,6 +39,12 @@ public class Main extends Application {
         detailEvent = new FXMLLoader(Main.class.getResource("DetailEvent.fxml")).load();
         listView = new FXMLLoader(Main.class.getResource("List.fxml")).load();
         mainPage = new FXMLLoader(Main.class.getResource("HomePage.fxml")).load();
+        MainController.definitely_delete.setOnShowing(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent windowEvent) {
+//                stage.;
+            }
+        });
         Scene scene = new Scene(mainPage,1280 , 600);
         stage.setTitle("NOCA");
         stage.getIcons().add(new Image(Note.class.getResourceAsStream("/AppObject/Icon/logo.png")));

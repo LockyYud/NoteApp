@@ -3,3 +3,27 @@
     -fx-background-insets: 0;
     -fx-padding: 0;
 }
+.anchor-pane{
+    -fx-background-color:  #C1D0B5;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 5.0, 5.0);
+}
+
+.vbox{
+    -fx-background-color: #C1D0B5;
+}
+
+.label{
+    -fx-font-size: 18;
+    -fx-font-weight: Bold;
+}
+
+.label-heading{
+    -fx-font-size: 30;
+    -fx-font-weight: Bold;
+}
+
+.label-empty{
+    -fx-font-size: 14;
+    -fx-font-weight: normal;
+}

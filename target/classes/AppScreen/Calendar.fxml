@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -7,54 +8,64 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pageCalendar" prefHeight="600.0" prefWidth="930.0" stylesheets="@../AppObject/Calendar.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AppScreen.CalendarController">
+<AnchorPane fx:id="pageCalendar" prefHeight="600.0" prefWidth="930.0" style="-fx-background-color: #F5F0BB;" stylesheets="@../AppObject/Calendar.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AppScreen.CalendarController">
    <children>
-      <HBox alignment="CENTER" layoutY="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <HBox fx:id="_listlist" alignment="CENTER" layoutY="294.0" prefHeight="306.0" prefWidth="930.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
          <children>
-            <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="250.0" prefWidth="310.0">
-               <content>
-                  <VBox fx:id="listImportantEvent" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
-               </content>
-            </ScrollPane>
-            <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="250.0" prefWidth="310.0">
-               <content>
-                  <VBox fx:id="listWeekEvent" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
-               </content>
-            </ScrollPane>
-            <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="250.0" prefWidth="310.0">
-               <content>
-                  <VBox fx:id="listTodayEvent" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
-               </content>
-            </ScrollPane>
+            <AnchorPane fx:id="_importantEvent" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="290.0" styleClass="anchor-pane">
+               <children>
+                  <Label alignment="CENTER" prefHeight="40.0" prefWidth="310.0" text="Important event" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <ScrollPane fitToHeight="true" fitToWidth="true" layoutY="47.0" prefWidth="310.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                     <content>
+                        <VBox fx:id="listImportantEvent" alignment="TOP_CENTER" prefWidth="100.0" spacing="5.0" styleClass="vbox" />
+                     </content>
+                  </ScrollPane>
+                  <Label fx:id="empty1" alignment="CENTER" disable="true" styleClass="label-empty" text="Empty" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </AnchorPane>
+            <AnchorPane fx:id="_weekEvent" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="290.0" styleClass="anchor-pane">
+               <children>
+                  <Label alignment="CENTER" layoutX="7.0" layoutY="3.0" prefHeight="40.0" prefWidth="310.0" text="Week's event" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <ScrollPane fitToHeight="true" fitToWidth="true" layoutY="47.0" prefWidth="310.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                     <content>
+                        <VBox fx:id="listWeekEvent" alignment="TOP_CENTER" prefWidth="100.0" spacing="5.0" styleClass="vbox" />
+                     </content>
+                  </ScrollPane>
+                  <Label fx:id="empty2" alignment="CENTER" disable="true" layoutX="64.0" layoutY="12.0" styleClass="label-empty" text="Empty" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="_todayEvent" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="290.0" styleClass="anchor-pane">
+               <children>
+                  <Label alignment="CENTER" prefHeight="40.0" prefWidth="310.0" text="Today's event" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <ScrollPane fitToHeight="true" fitToWidth="true" layoutY="47.0" prefWidth="310.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                     <content>
+                        <VBox fx:id="listTodayEvent" alignment="TOP_CENTER" prefWidth="100.0" spacing="5.0" styleClass="vbox" />
+                     </content>
+                  </ScrollPane>
+                  <Label fx:id="empty3" alignment="CENTER" disable="true" styleClass="label-empty" text="Empty" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
+               </children>
+            </AnchorPane>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="399.0" layoutY="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Label text="CALENDAR">
-               <font>
-                  <Font name="System Bold" size="25.0" />
-               </font>
-            </Label>
-         </children>
-      </HBox>
-      <HBox alignment="CENTER" layoutX="143.0" layoutY="303.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-         <children>
-            <Label alignment="CENTER" prefWidth="310.0" text="Important event">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" prefWidth="310.0" text="Week's event">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" prefWidth="310.0" text="Today's event">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-         </children>
-      </HBox>
+      <Label alignment="CENTER" layoutX="399.3333435058594" layoutY="7.333333492279053" prefHeight="50.0" styleClass="label-heading" text="CALENDAR" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

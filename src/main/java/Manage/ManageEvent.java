@@ -3,6 +3,7 @@ package Manage;
 import AppObject.ContentEvent;
 import AppObject.Event;
 import AppObject.Note;
+import AppScreen.CalendarController;
 import AppScreen.EventContentController;
 import AppScreen.ListObjectController;
 import AppScreen.Main;
@@ -41,6 +42,7 @@ public abstract class ManageEvent{
             if(event.getId() == idEventSelected) {
                 Main.calendarView.getChildren().remove(Main.detailEvent);
                 ListObjectController.listEvent.getChildren().remove(event.getButton());
+                CalendarController.deleteButton(event.getButtonDay(), event.getButtonWeek(), event.getButtonImportant());
                 try {
                     String path = "src\\main\\resources\\EventData\\" + "event"+ event.getId() + ".ser";
                     File file = new File(path);

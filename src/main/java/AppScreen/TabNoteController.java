@@ -19,7 +19,6 @@ public class TabNoteController implements Initializable {
     public static TabPane tabNote = new TabPane();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        
     }
-
 }

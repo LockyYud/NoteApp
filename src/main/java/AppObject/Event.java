@@ -6,6 +6,9 @@ import Manage.ManageEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 
 import java.time.ZonedDateTime;
 
@@ -28,15 +31,37 @@ public class Event {
         button.setToggleGroup(buttonEvent);
         button.getStylesheets().add(this.getClass().getResource("buttonstyle.css").toExternalForm());
         button.setOnMouseClicked(Event -> {
-            EventContentController.assignEvent(this);
-            if(!Main.calendarView.getChildren().contains(Main.detailEvent)){
-                Main.calendarView.getChildren().add(Main.detailEvent);
+            if(Event.getButton().equals(MouseButton.PRIMARY)){
+                ManageEvent.idEventSelected = this.getId();
+                if(button.isSelected()){
+                    EventContentController.assignEvent(this);
+                    if (!Main.calendarView.getChildren().contains(Main.detailEvent)) {
+                        Main.calendarView.getChildren().add(Main.detailEvent);
+                    }
+                } else {
+                    if (Main.calendarView.getChildren().contains(Main.detailEvent)) {
+                        Main.calendarView.getChildren().remove(Main.detailEvent);
+                    }
+                }
             }
-            ManageEvent.idEventSelected = this.getId();
         });
 
         buttonDay.setText(button.getText());
-        buttonDay.setOnMouseClicked(button.getOnMouseClicked());
+        buttonDay.setOnMouseClicked(Event -> {
+            if(Event.getButton().equals(MouseButton.PRIMARY)){
+                ManageEvent.idEventSelected = this.getId();
+                if(buttonDay.isSelected()){
+                    EventContentController.assignEvent(this);
+                    if (!Main.calendarView.getChildren().contains(Main.detailEvent)) {
+                        Main.calendarView.getChildren().add(Main.detailEvent);
+                    }
+                } else {
+                    if (Main.calendarView.getChildren().contains(Main.detailEvent)) {
+                        Main.calendarView.getChildren().remove(Main.detailEvent);
+                    }
+                }
+            }
+        });
         buttonDay.setPrefSize(270, button.getPrefHeight());
         buttonDay.setMinSize(270, button.getMinHeight());
         buttonDay.setMaxSize(270, button.getMinHeight());
@@ -44,7 +69,21 @@ public class Event {
         buttonDay.setToggleGroup(buttonEvent);
 
         buttonImportant.setText(button.getText());
-        buttonImportant.setOnMouseClicked(button.getOnMouseClicked());
+        buttonImportant.setOnMouseClicked(Event -> {
+            if(Event.getButton().equals(MouseButton.PRIMARY)){
+                ManageEvent.idEventSelected = this.getId();
+                if(buttonImportant.isSelected()){
+                    EventContentController.assignEvent(this);
+                    if (!Main.calendarView.getChildren().contains(Main.detailEvent)) {
+                        Main.calendarView.getChildren().add(Main.detailEvent);
+                    }
+                } else {
+                    if (Main.calendarView.getChildren().contains(Main.detailEvent)) {
+                        Main.calendarView.getChildren().remove(Main.detailEvent);
+                    }
+                }
+            }
+        });
         buttonImportant.setPrefSize(270, button.getPrefHeight());
         buttonImportant.setMinSize(270, button.getMinHeight());
         buttonImportant.setMaxSize(270, button.getMinHeight());
@@ -52,13 +91,30 @@ public class Event {
         buttonImportant.setToggleGroup(buttonEvent);
 
         buttonWeek.setText(button.getText());
-        buttonWeek.setOnMouseClicked(button.getOnMouseClicked());
+        buttonWeek.setOnMouseClicked(Event -> {
+            if(Event.getButton().equals(MouseButton.PRIMARY)){
+                ManageEvent.idEventSelected = this.getId();
+                if(buttonWeek.isSelected()){
+                    EventContentController.assignEvent(this);
+                    if (!Main.calendarView.getChildren().contains(Main.detailEvent)) {
+                        Main.calendarView.getChildren().add(Main.detailEvent);
+                    }
+                } else {
+                    if (Main.calendarView.getChildren().contains(Main.detailEvent)) {
+                        Main.calendarView.getChildren().remove(Main.detailEvent);
+                    }
+                }
+            }
+        });
         buttonWeek.setPrefSize(270, button.getPrefHeight());
         buttonWeek.setMinSize(270, button.getMinHeight());
         buttonWeek.setMaxSize(270, button.getMinHeight());
         buttonWeek.getStylesheets().add(this.getClass().getResource("buttonstyle.css").toExternalForm());
         buttonWeek.setToggleGroup(buttonEvent);
 
+        if(contentEvent.isImportant()) {
+            setGraphic(Note.class.getResource("/AppObject/Icon/importantoff.png").toExternalForm());
+        }
     }
     public int getId() {
         return contentEvent.getId();
@@ -85,11 +141,12 @@ public class Event {
     public ZonedDateTime getStartTime() {
         return contentEvent.getStart_time();
     }
-    public void save(String titleEvent, String bodyEvent, ZonedDateTime timeStart, ZonedDateTime timeEnd) {
+    public void save(String titleEvent, String bodyEvent, String location, ZonedDateTime timeStart, ZonedDateTime timeEnd) {
         contentEvent.setBody(bodyEvent);
         contentEvent.setTitle(titleEvent);
         contentEvent.setEnd_time(timeEnd);
         contentEvent.setStart_time(timeStart);
+        contentEvent.setLocation(location);
         ManageEvent.writeDataofEventtoFile(contentEvent);
     }
 
@@ -103,5 +160,18 @@ public class Event {
 
     public ToggleButton getButtonDay() {
         return buttonDay;
+    }
+    public void setGraphic(String url) {
+        button.setGraphic(new ImageView(new Image(url, 20,20,true,false)));
+        buttonWeek.setGraphic(new ImageView(new Image(url, 20,20,true,false)));
+        buttonImportant.setGraphic(new ImageView(new Image(url, 20,20,true,false)));
+        buttonDay.setGraphic(new ImageView(new Image(url, 20,20,true,false)));
+    }
+
+    public void setText(String text) {
+        button.setText(text);
+        buttonWeek.setText(text);
+        buttonImportant.setText(text);
+        buttonDay.setText(text);
     }
 }

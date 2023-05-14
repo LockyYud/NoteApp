@@ -8,6 +8,15 @@ public class ContentEvent extends ContentObject implements Serializable {
 
     private ZonedDateTime start_time = ZonedDateTime.now();
     private ZonedDateTime end_time = ZonedDateTime.now();
+    private String location;
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getLocation() {
+        return location;
+    }
 
     public ZonedDateTime getStart_time() {
         return start_time;
@@ -28,6 +37,7 @@ public class ContentEvent extends ContentObject implements Serializable {
     public ContentEvent() {
         created_at = ZonedDateTime.now();
         updated_at = ZonedDateTime.now();
+        location = "";
         this.id = this.hashCode();
     }
 }

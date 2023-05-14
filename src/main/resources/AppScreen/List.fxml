@@ -11,12 +11,12 @@
 
 <AnchorPane fx:id="listView" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="290.0" styleClass="page" stylesheets="@../AppObject/list.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AppScreen.ListObjectController">
    <children>
-      <AnchorPane layoutX="9.0" layoutY="40.0" prefHeight="50.0" prefWidth="290.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+      <AnchorPane layoutX="9.0" layoutY="40.0" prefHeight="50.0" prefWidth="290.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
          <children>
             <TextField fx:id="boxSearch" prefHeight="35.0" prefWidth="197.0" promptText="Search...." styleClass="combo-box" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="5.0" />
          </children>
       </AnchorPane>
-      <ScrollPane fitToHeight="true" fitToWidth="true" focusTraversable="false" hbarPolicy="NEVER" layoutY="124.0" prefHeight="376.0" prefWidth="290.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
+      <ScrollPane fitToHeight="true" fitToWidth="true" focusTraversable="false" hbarPolicy="NEVER" layoutY="124.0" prefHeight="376.0" prefWidth="290.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="111.0">
          <content>
             <AnchorPane fx:id="listObject" prefHeight="367.0" prefWidth="288.0" style="-fx-background-color: #C9DBB2;" />
          </content>
@@ -30,7 +30,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <HBox alignment="CENTER_RIGHT" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox alignment="CENTER_RIGHT" prefHeight="45.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ComboBox fx:id="sort" maxHeight="-Infinity" maxWidth="-Infinity" promptText="sort" style="-fx-border-color: black; -fx-border-radius: 12; -fx-background-radius: 12;" />
             <Button mnemonicParsing="false" onMouseClicked="#setCloseList" prefHeight="42.0" prefWidth="41.0" style="-fx-background-color: transparent;">
