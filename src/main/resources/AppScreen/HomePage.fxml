@@ -58,19 +58,19 @@
                </children>
             </AnchorPane>
             <ToggleButton layoutX="15.0" layoutY="160.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#viewNote" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10;" stylesheets="@../AppObject/buttonstyle.css">
-               <graphic>
-                  <ImageView fitHeight="97.0" fitWidth="36.0" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../CNPM/icon/note.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
                <toggleGroup>
                   <ToggleGroup fx:id="page" />
                </toggleGroup>
+               <graphic>
+                  <ImageView fitWidth="40.0" preserveRatio="true">
+                     <image>
+                        <Image url="@../AppObject/Icon/note.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </ToggleButton>
             <ToggleButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#viewCalendar" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 10;" stylesheets="@../AppObject/buttonstyle.css" toggleGroup="$page">
                <VBox.margin>
