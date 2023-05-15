@@ -11,13 +11,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.util.Callback;
 import javafx.util.Duration;
 
@@ -33,8 +31,10 @@ public class ListObjectController implements Initializable {
     private ComboBox<String> sort;
     @FXML
     private TextField boxSearch;
-
-
+    @FXML
+    private Button allList;
+    @FXML
+    private Text empty;
     public static AnchorPane list;
     public static VBox listNote = new VBox();
     public static VBox listEvent = new VBox();
@@ -137,6 +137,24 @@ public class ListObjectController implements Initializable {
                 uploadListEvent(ManageEvent.sortList(sort.getSelectionModel().getSelectedIndex(), boxSearch.getText()));
             }
         });
+
+        AnimationTimer checkAlllist = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                if(listObject.getChildren().contains(listNote)){
+                    if(!important){
+                        allList.setText("Notes important");
+                    }
+                    listObject.getChildren().remove(empty);
+                } else if(listObject.getChildren().contains(listEvent)) {
+                    allList.setText("All event");
+                    listObject.getChildren().remove(empty);
+//                    if(listEvent.getChildren().isEmpty()) listNote.getChildren().add(empty);
+                }
+
+            }
+        };
+        checkAlllist.start();
     }
     @FXML
     private void setCloseList() {
@@ -195,4 +213,31 @@ public class ListObjectController implements Initializable {
             }
         }
     }
+    @FXML
+    private void setAllList() {
+        if(listObject.getChildren().contains(listNote)){
+            if(!important){
+                listNote.getChildren().clear();
+                for (Note note : ManageNote.getListRoot()) {
+                    if (note.getContentNote().isImportant()) {
+                        listNote.getChildren().add(note.getButton());
+                    }
+                }
+                allList.setText("All notes");
+                important = !important;
+            } else {
+                listNote.getChildren().clear();
+                for (Note note : ManageNote.getListRoot()) {
+//                    if (note.getContentNote().isImportant()) {
+                        listNote.getChildren().add(note.getButton());
+//                    }
+                }
+                allList.setText("Note important");
+                important = !important;
+            }
+        } else if(listObject.getChildren().contains(listEvent)) {
+            uploadListEvent((ArrayList<Event>) ManageEvent.getListRoot());
+        }
+    }
+    private boolean important = false;
 }

@@ -108,6 +108,7 @@ public abstract class ManageNote{
         Main.noteView.getSelectionModel().select(note.getTab());
         listRoot.add(note);
         list.add(note);
+        note.getButton().setSelected(true);
     }
 
 }

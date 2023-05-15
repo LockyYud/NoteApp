@@ -84,6 +84,7 @@ public abstract class ManageEvent{
         EventContentController.assignEvent(event);
         listRoot.add(event);
         list.add(event);
+        event.getButton().setSelected(true);
     }
 
     public static ArrayList<Event> sortList (int type, String item) {

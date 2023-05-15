@@ -57,8 +57,8 @@ public class CalendarController implements Initializable {
     private static TranslateTransition listup = new TranslateTransition();
     private static TranslateTransition calendardown = new TranslateTransition();
 
-    private static VBox _listWeekEvent;
-    private static VBox _listTodayEvent;
+    public static VBox _listWeekEvent;
+    public static VBox _listTodayEvent;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         listlist = _listlist;

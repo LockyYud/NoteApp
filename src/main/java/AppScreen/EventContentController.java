@@ -20,10 +20,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
 import java.net.URL;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 
@@ -94,6 +91,7 @@ public class EventContentController implements Initializable {
         body.setOnKeyReleased(Event -> {
             haveSaved.setOpacity(0);
         });
+        datePicker.setValue(LocalDate.now());
         datePicker.setOnMouseClicked(e -> {
             if(event.getStartTime().toLocalDateTime().getDayOfYear() != datePicker.getValue().getDayOfYear()){
                 haveSaved.setOpacity(0);
@@ -181,15 +179,43 @@ public class EventContentController implements Initializable {
     private void saveEvent() {
 
         try {
+            String hto = hourTo.getText();
+            String mto = minuteTo.getText();
+            String hfo = hFrom.getText();
+            String mfo = mFrom.getText();
+            if(hto.equals("") || hto == null) {
+                hto = "0";
+            }
+            if(mto.equals("") || mto == null) {
+                mto = "0";
+            }
+            if(hfo.equals("") || hfo == null) {
+                hfo = "0";
+            }
+            if(mfo.equals("") || hto == null) {
+                hto = "0";
+            }
             timeEnd = LocalDateTime.of(datePicker.getValue()
-                    , LocalTime.of(Integer.parseInt(hourTo.getText()),Integer.parseInt(minuteTo.getText())));
+                    , LocalTime.of(Integer.parseInt(hto),Integer.parseInt(mto)));
             timeStart = LocalDateTime.of(datePicker.getValue()
-                    , LocalTime.of(Integer.parseInt(hourFrom.getText()),Integer.parseInt(minuteFrom.getText())));
+                    , LocalTime.of(Integer.parseInt(hfo),Integer.parseInt(mfo)));
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         event.save(titleEvent.getText(), bodyEvent.getText(), location.getText(), timeStart.atZone(zoneId), timeEnd.atZone(zoneId));
         haveSaved.setOpacity(1);
+        if(datePicker.getValue().equals(LocalDate.now())) {
+            if(!CalendarController._listTodayEvent.getChildren().contains(event.getButtonDay())){
+                CalendarController._listTodayEvent.getChildren().add(event.getButtonDay());
+            }
+        }
+        if(datePicker.getValue().getYear() == LocalDate.now().getYear()
+                && datePicker.getValue().getDayOfYear() > LocalDate.now().getDayOfYear() - LocalDate.now().getDayOfWeek().getValue()
+                && datePicker.getValue().getDayOfYear() <= LocalDate.now().getDayOfYear() - LocalDate.now().getDayOfWeek().getValue() + 7) {
+            if(!CalendarController._listWeekEvent.getChildren().contains(event.getButtonWeek())){
+                CalendarController._listWeekEvent.getChildren().add(event.getButtonWeek());
+            }
+        }
     }
     public static void assignEvent(Event e) {
         event = e;
@@ -218,7 +244,11 @@ public class EventContentController implements Initializable {
         } else {
             mTo.setText("0" + Integer.toString(timeEnd.getMinute()));
         }
-        dateHappenEvent.setValue(CalendarController.getDaySelected());
+
+        dateHappenEvent.setValue(e.getEndTime().toLocalDate());
+        if(CalendarController.getDaySelected() != null) {
+            dateHappenEvent.setValue(LocalDate.of(CalendarController.getDaySelected().getYear(), CalendarController.getDaySelected().getMonth(), CalendarController.getDaySelected().getDayOfMonth()));
+        }
         update.setText(e.getUpdated_at().toLocalDate().toString());
         create.setText(e.getCreated_at().toLocalDate().toString());
         locationEvent.setText(e.getContentEvent().getLocation());

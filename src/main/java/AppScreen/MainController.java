@@ -14,12 +14,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -29,6 +31,8 @@ public class MainController implements Initializable {
     private AnchorPane sectionContentView;
     @FXML
     private Button openList;
+    @FXML
+    private Text NoteTips;
     public static Button _openList;
     public static AnchorPane contentView;
     public static Stage definitely_delete = new Stage();
@@ -94,7 +98,15 @@ public class MainController implements Initializable {
         open.setByX(290);
 
         setUpStageDelete();
-
+        listNoteTips.add("Be organized: Use headings, subheadings, bullet points, or numbered lists to structure your notes. This helps you find information quickly and understand the relationships between different ideas.");
+        listNoteTips.add("Use abbreviations and symbols: Develop a set of abbreviations or symbols that you can use to write faster. This can be particularly useful during lectures or when taking notes in real-time.");
+        listNoteTips.add("Listen actively: Focus on the main ideas and key points being discussed. Don't try to write down everything word-for-word, as it can be overwhelming and ineffective. Instead, paraphrase and summarize information in your own words.");
+        listNoteTips.add("Be selective: Prioritize important information and concepts over trivial details. Capture the main ideas, supporting examples, and any additional insights provided by the speaker or text.");
+        listNoteTips.add("Visualize information: Use diagrams, charts, mind maps, or other visual aids to represent relationships between ideas or complex concepts. Visual representations can enhance your understanding and make it easier to remember information.");
+        listNoteTips.add("Review and revise: Regularly review and revise your notes to reinforce your understanding. Add clarifications, additional details, or examples if needed. This process helps solidify the information in your memory.");
+        listNoteTips.add("Use different colors: Incorporate different colors in your notes to visually distinguish between different topics or highlight important information. This can make your notes more engaging and memorable.");
+        listNoteTips.add("Include examples: When possible, include relevant examples to illustrate concepts or clarify your understanding. Examples can make the information more concrete and relatable.");
+        listNoteTips.add("Date and number your pages: Assigning dates and page numbers to your notes helps you keep them in chronological order and easily refer back to specific information later on.");
     }
 
     private void setUpStageDelete() {
@@ -156,5 +168,11 @@ public class MainController implements Initializable {
 
     public static void openBoxDelete() {
         definitely_delete.show();
+    }
+
+    ArrayList<String> listNoteTips = new ArrayList<>();
+    @FXML
+    private void setNoteTips() {
+        NoteTips.setText(listNoteTips.get((int) (Math.random() * listNoteTips.size())));
     }
 }
