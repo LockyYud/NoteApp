@@ -3,14 +3,7 @@ Phiên bản 1.0
 Ngày ra mắt chính thức: 15/5/2023
 
 <br />
-  <h3 align="center">BÀI TẬP CNPM</h3>
-  <h4 align="center">Tên nhóm: Nhóm 20</h4>
-
-  <p align="center">
-    Ứng dụng ghi chú của môn học CNPM của UET
-    <br />
-    <br />
-  </p>
+  <h3 align="center">ỨNG DỤNG GHI CHÚ NOCA</h3>
 </div>
 
 <!-- NỘI DUNG -->
